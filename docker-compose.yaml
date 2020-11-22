@@ -7,7 +7,6 @@ services:
     container_name: laravel_app
     environment:
       - VIRTUAL_HOST=dev.laravel.com
-
     volumes:
       - ./src:/var/www/html
   db:
