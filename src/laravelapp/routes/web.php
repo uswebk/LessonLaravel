@@ -16,7 +16,10 @@ Route::get('/', function () {
 });
 
 
-Route::get('hello/{msg?}', function($msg='no') {
+Route::get('hello', 'HelloController@index');
+Route::get('hello/other', 'HelloController@other');
+
+Route::get('hello2/{msg?}', function($msg='no') {
     $html = <<<EOF
 <html>
 <head>
