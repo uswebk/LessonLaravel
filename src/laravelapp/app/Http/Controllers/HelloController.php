@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 global $head, $style, $body, $end;
 $head = '<head></head>';
@@ -22,15 +23,17 @@ function tag($tag, $txt) {
 
 class HelloController extends Controller
 {
-    public function index() {
+    public function index(Request $request, Response $response) {
         global $head, $style, $body, $end;
 
         $html = $head . tag('title', 'Hello/Index'). $style . $body
                 . tag('h1', 'Index')
-                . tag('p', 'This is Index page')
-                . '<a href="/hello/other">go to Other page </a>'
+                . tag('h3', 'Request')
+                . tag('pre', $request)
+                . tag('h3', 'Response')
+                . tag('pre', $response)
                 . $end;
-        return $html;
+        return $response->setContent($html);
     }
 
     public function other() {
