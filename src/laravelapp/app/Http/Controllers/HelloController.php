@@ -23,7 +23,17 @@ function tag($tag, $txt) {
 
 class HelloController extends Controller
 {
-    public function index(Request $request, Response $response) {
+    public function index($id="zero", Request $request){
+
+        $data = [
+                'msg'=>'from controller',
+                'id'=>$id,
+                'name'=>$request->name,
+                ];
+        return view('hello.index', $data);
+    }
+
+    public function request(Request $request, Response $response) {
         global $head, $style, $body, $end;
 
         $html = $head . tag('title', 'Hello/Index'). $style . $body
