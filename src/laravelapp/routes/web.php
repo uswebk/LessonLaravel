@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('hello/{id?}','HelloController@index');
+Route::post('hello/','HelloController@post');
 
 Route::get('hello/request', 'HelloController@request');
 Route::get('hello/other', 'HelloController@other');

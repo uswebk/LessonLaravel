@@ -23,14 +23,13 @@ function tag($tag, $txt) {
 
 class HelloController extends Controller
 {
-    public function index($id="zero", Request $request){
+    public function index(){
+        $data = ['one','two','three','four',];
+        return view('hello.index', ['data'=>$data]);
+    }
 
-        $data = [
-                'msg'=>'from controller',
-                'id'=>$id,
-                'name'=>$request->name,
-                ];
-        return view('hello.index', $data);
+    public function post(Request $request) {
+        return view('hello.index', ['msg'=> $request->msg]);
     }
 
     public function request(Request $request, Response $response) {
