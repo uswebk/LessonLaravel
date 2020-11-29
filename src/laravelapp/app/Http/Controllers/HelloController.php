@@ -24,8 +24,14 @@ function tag($tag, $txt) {
 class HelloController extends Controller
 {
     public function index(){
-        $data = ['one','two','three','four',];
-        return view('hello.index', ['data'=>$data]);
+        $data = [
+            ['name'=>'one','mail'=>'one@email.com'],
+            ['name'=>'two','mail'=>'two@email.com'],
+            ['name'=>'three','mail'=>'three@email.com'],
+            ['name'=>'four','mail'=>'four@email.com'],
+        ];
+        $message = "Hello";
+        return view('hello.index', ['data'=>$data,'message'=>$message]);
     }
 
     public function post(Request $request) {
