@@ -23,15 +23,16 @@ function tag($tag, $txt) {
 
 class HelloController extends Controller
 {
-    public function index(){
-        $data = [
-            ['name'=>'one','mail'=>'one@email.com'],
-            ['name'=>'two','mail'=>'two@email.com'],
-            ['name'=>'three','mail'=>'three@email.com'],
-            ['name'=>'four','mail'=>'four@email.com'],
-        ];
-        $message = "Hello";
-        return view('hello.index', ['data'=>$data,'message'=>$message]);
+    public function index(Request $request){
+        // $data = [
+        //     ['name'=>'one','mail'=>'one@email.com'],
+        //     ['name'=>'two','mail'=>'two@email.com'],
+        //     ['name'=>'three','mail'=>'three@email.com'],
+        //     ['name'=>'four','mail'=>'four@email.com'],
+        // ];
+        // $message = "Hello";
+        // return view('hello.index', ['data'=>$data,'message'=>$message]);
+        return view('hello.index', ['data'=>$request->data]);
     }
 
     public function post(Request $request) {
