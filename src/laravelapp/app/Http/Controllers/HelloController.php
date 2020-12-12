@@ -32,11 +32,20 @@ class HelloController extends Controller
         // ];
         // $message = "Hello";
         // return view('hello.index', ['data'=>$data,'message'=>$message]);
-        return view('hello.index', ['data'=>$request->data]);
+        // return view('hello.index', ['data'=>$request->data]);
+        return view('hello.index', ['msg'=>"input!"]);
     }
 
     public function post(Request $request) {
-        return view('hello.index', ['msg'=> $request->msg]);
+        $validate_rule = [
+            'name' => 'required',
+            'mail' => 'email',
+            'age' => 'numeric|between:0,150',
+        ];
+
+        $this->validate($request, $validate_rule);
+        // return view('hello.index', ['msg'=> $request->msg]);
+        return view('hello.index', ['msg'=> 'OK!']);
     }
 
     public function request(Request $request, Response $response) {
