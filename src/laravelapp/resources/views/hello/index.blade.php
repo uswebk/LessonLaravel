@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-  <p>{{$msg}}</p>
+  {{-- <p>{{$msg}}</p> --}}
   @if (count($errors) > 0)
   <p>Error!</p>
   @endif
@@ -68,8 +68,23 @@
   </form>
 
 
-<p>the <middleware>google.com</middleware></p>
-<p>the <middleware>yahoo.co.jp</middleware></p>
+  <p>the <middleware>google.com</middleware></p>
+  <p>the <middleware>yahoo.co.jp</middleware></p>
+
+  <table>
+    <tr>
+      <th>NAME</th>
+      <th>MAIL</th>
+      <th>AGE</th>
+    </tr>
+  @foreach ($items as $item)
+  <tr>
+    <td>{{$item->name}}</td>
+    <td>{{$item->mail}}</td>
+    <td>{{$item->age}}</td>
+  </tr>
+  @endforeach
+  </table>
 @endsection
 @section('content')
   <p>ここが本文のコンテンツです。</p>
