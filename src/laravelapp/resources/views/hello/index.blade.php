@@ -73,9 +73,9 @@
 
   <table>
     <tr>
-      <th>NAME</th>
-      <th>MAIL</th>
-      <th>AGE</th>
+      <th><a href="/hello?sort=name">NAME</a></th>
+      <th><a href="/hello?sort=mail">MAIL</a></th>
+      <th><a href="/hello?sort=age">AGE</a></th>
     </tr>
   @foreach ($items as $item)
   <tr>
@@ -85,6 +85,7 @@
   </tr>
   @endforeach
   </table>
+  {{$items->appends(['sort' => $sort])->links()}}
 @endsection
 @section('content')
   <p>ここが本文のコンテンツです。</p>

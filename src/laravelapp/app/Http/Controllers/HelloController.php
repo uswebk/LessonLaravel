@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use App\Person;
 
 global $head, $style, $body, $end;
 $head = '<head></head>';
@@ -41,11 +42,14 @@ class HelloController extends Controller
         } else {
             $msg = 'Not Cookie';
         }
-
+        $sort = $request->sort;
         // クエリビルダ
         // $items = DB::table('people')->get(['id','name']); // カラム指定
-        $items = DB::table('people')->get();
-        return view('hello.index', ['msg'=> $msg, 'items'=>$items]);
+        // $items = DB::table('people')->get();
+        // $items = DB::table('people')->simplePaginate(2);
+        // $items = Person::orderBy($sort, 'asc')->simplePaginate(2);
+        $items = Person::orderBy($sort, 'asc')->paginate(2);
+        return view('hello.index', ['msg'=> $msg, 'items'=>$items, 'sort' => $sort]);
     }
 
     public function request(Request $request, Response $response)
