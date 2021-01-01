@@ -17,7 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('hello/','HelloController@index')->middleware(HelloMiddleware::class);
+// Route::get('hello/','HelloController@index')->middleware(HelloMiddleware::class);
+Route::get('hello/','HelloController@index')->middleware(HelloMiddleware::class)->middleware('auth');
 // Route::get('hello/{id?}','HelloController@index');
 // Route::get('hello/{id?}','HelloController@index')->middleware('hello');
 Route::post('hello/','HelloController@post');
@@ -46,6 +47,8 @@ Route::post('board/add', 'BoardController@create');
 Route::get('hello/rest', 'HelloController@rest');
 Route::get('hello/session', 'HelloController@ses_get');
 Route::post('hello/session', 'HelloController@ses_put');
+Route::get('hello/auth', 'HelloController@getAuth');
+Route::post('hello/auth', 'HelloController@postAuth');
 
 Route::resource('rest', 'RestappController');
 
@@ -70,3 +73,6 @@ EOF;
 
     return $html;
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

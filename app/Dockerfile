@@ -13,6 +13,7 @@ RUN apt-get update \
     vim \
     libpng-dev \
     libpq-dev \
+    nodejs npm \
     && docker-php-ext-install pdo_mysql
 
 RUN mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled

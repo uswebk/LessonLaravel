@@ -8,6 +8,7 @@ use App\Http\Requests\HelloRequest;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use App\Person;
+use Illuminate\Support\Facades\Auth;
 
 global $head, $style, $body, $end;
 $head = '<head></head>';
@@ -36,6 +37,8 @@ class HelloController extends Controller
         // } else {
         //     $items = DB::select('select * from people');
         // }
+
+        $user = Auth::user();
         if ($request->hasCookie('msg'))
         {
             $msg = 'Cookie:' . $request->cookie('msg');
@@ -49,7 +52,7 @@ class HelloController extends Controller
         // $items = DB::table('people')->simplePaginate(2);
         // $items = Person::orderBy($sort, 'asc')->simplePaginate(2);
         $items = Person::orderBy($sort, 'asc')->paginate(2);
-        return view('hello.index', ['msg'=> $msg, 'items'=>$items, 'sort' => $sort]);
+        return view('hello.index', ['msg'=> $msg, 'items'=>$items, 'sort' => $sort, 'user' => $user]);
     }
 
     public function request(Request $request, Response $response)
@@ -167,5 +170,24 @@ class HelloController extends Controller
         $msg = $request->input;
         $sesdata = $request->session()->put('msg', $msg);
         return redirect('hello/session');
+    }
+
+    public function getAuth(Request $request)
+    {
+        $param = ['message' => 'ログインしてください'];
+        return view('hello.auth', $param);
+    }
+
+    public function postAuth(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $msg = 'ログインしました。(' . Auth::user()->name . ')';
+        } else {
+            $msg = 'ログインに失敗しました。';
+        }
+        return view('hello.auth', ['message' => $msg]);
     }
 }

@@ -8,8 +8,12 @@
 @endsection
 
 @section('content')
-  {{-- <p>{{$msg}}</p> --}}
-  @if (count($errors) > 0)
+@if (Auth::check())
+<p>USER: {{$user->name . '(' . $user->email . ')'}}</p>
+@else
+<p>ログインしていません。(<a href="/login">ログイン</a>|<a href="/register">登録</a>)</p>
+@endif
+@if (count($errors) > 0)
   <p>Error!</p>
   @endif
   <form action="/hello" method="post">
